@@ -54,10 +54,10 @@ const createDir = function () {
     let tempHTML = await fs.promises.readFile(template, "utf-8");
     const matches = tempHTML.matchAll(/{{(.*?)}}/g);
     for (let match of matches) {
-      const nameComponent = match[1];
-      let fileOfComponent = path.join(componentsFile, `${nameComponent}.html`);
-      const htmlComponent = await fs.promises.readFile(fileOfComponent, "utf8");
-      tempHTML = tempHTML.replace(match[0], htmlComponent);
+      const nameOfComponent = match[1];
+      let fileOfComponent = path.join(componentsFile, `${nameOfComponent}.html`);
+      const componentHTML = await fs.promises.readFile(fileOfComponent, "utf8");
+      tempHTML = tempHTML.replace(match[0], componentHTML);
     }
     await fs.promises.writeFile(
       path.join(dist, "index.html"),
