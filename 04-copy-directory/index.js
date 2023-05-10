@@ -19,5 +19,29 @@ function copyDir() {
     });
     console.log("Папка создана");
   });
+
 }
 copyDir();
+
+
+function lookAfter () {
+  fs.readdir(newFolder, { withFileTypes: true }, (error, files) => {
+      if (error) {
+        console.log(error)
+      };
+      files.forEach((file) => {
+        fs.readFile(path.join(__dirname, "files", file.name), (error) => {
+          if (error) {
+            fs.unlink(path.join(__dirname, 'files-copy', file.name), (error) => {
+              if (error) {
+                console.log (error)
+              };
+              console.log('файл удален');
+            });
+          }
+        });
+      });
+    }
+  );
+}
+lookAfter(); 
